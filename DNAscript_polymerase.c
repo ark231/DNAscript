@@ -17,27 +17,29 @@
 #define NUM_INFILE 1
 #endif
 
-void error(char*);
+void error(const char*);
 int main(int argc , char *argv[]){
 
   FILE *input=NULL,*output=NULL;
-  char *outname=NULL;
+  char *out_name=NULL,*out_ext=NULL;
   int inleng=strlen(argv[NUM_INFILE])+1;
-  outname=(char*)malloc(inleng);
-  if(outname==NULL){
-    error("error: cannot malloc");
+  out_name=(char*)malloc(inleng);
+  if(out_name==NULL){
+    error("error: cannot malloc\n");
   }
-  strcpy(outname,argv[NUM_INFILE]);
-  outname=strtok(outname,".");
-  strtok(NULL,".");
-
+  strcpy(out_name,argv[NUM_INFILE]);
+  out_name=strtok(out_name,".");
+  out_ext=strtok(NULL,".");
+  if(strcmp(out_ext,"dna")!=0 && strcmp(out_ext,"DNA")!=0){
+    error("error: This isn't DNAscript source file \n extention must be \"DNA\"or\"dna\"\n");
+  }
   input=fopen(argv[NUM_INFILE],"r");
-  output=fopen(outname,w);
+  output=fopen(out_name,"w");
 
 
 }
 
 void error(const char *errmsg){
-  printf("%s\n",errmsg);
+  printf("%s",errmsg);
   exit(EXIT_FAILURE);
 }
