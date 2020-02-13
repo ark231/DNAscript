@@ -59,7 +59,7 @@ int main(int argc , char *argv[]){
     switch(inchartmp){
       case 'A':
       case 'a':
-        fprintf(output,"T");
+        fprintf(output,"U");
         break;
       case 'T':
       case 't':
